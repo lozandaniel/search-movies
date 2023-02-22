@@ -1,24 +1,15 @@
 import { useState, useRef } from 'react'
 import { InfoMovie } from './components/InfoMovie'
 import { LoadingIcon } from './components/Loading'
+import { searchMovies } from './services/SearchMovies'
 import './App.css'
 
 function App() {
   const [movies, setMovies] = useState([])
   const [search, setSearch] = useState('')
   const [err, setErr] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const valueSearch = useRef(search)
-
-  const searchMovies = async ({ search }) => {
-    const res = await fetch(
-      `https://www.omdbapi.com/?s=${search}&apikey=32f4401d`
-    )
-    const json = await res.json()
-    const data = json.Search
-    console.log(data)
-    return data
-  }
 
   const handleChange = (e) => {
     const value = e.target.value
